@@ -6,6 +6,7 @@ const elasticsearch = require('elasticsearch');
 const PORT = process.env.PORT || 12201;
 const BIGQUERY_DATASET = process.env.BIGQUERY_DATASET;
 const BIGQUERY_TABLE = process.env.BIGQUERY_TABLE;
+const bigqueryClient = new BigQuery();
 
 async function insert(data) {
   // Creates a client
@@ -18,7 +19,7 @@ async function insert(data) {
     raw_data,
     level
   } = data;
-  const bigqueryClient = new BigQuery();
+
   const rows = [
     {
       id,
@@ -30,7 +31,6 @@ async function insert(data) {
       raw_data: JSON.stringify(data),
     }
   ];
-  console.log(rows)
 
   // Insert data into table
   await bigqueryClient
