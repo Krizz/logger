@@ -2,8 +2,8 @@
   {
     "script": "app.js",
     "name": "logger-worker",
-    "exec_mode": "fork",
-    "node_args": "--max_old_space_size=8000",
-    "watch": true
+    "watch": true,
+    "exec_mode": "cluster",
+    "instances": "max"
   }
 ]
