@@ -1,5 +1,6 @@
 const { nanoid } = require('nanoid');
 const gelfserver = require('graygelf/server');
+const http = require('http');
 const {BigQuery} = require('@google-cloud/bigquery');
 const elasticsearch = require('elasticsearch');
 
@@ -51,7 +52,6 @@ const parseJSON = (message) => {
 }
 
 server.on('message', async gelf => {
-  console.log('message');
   const { host, timestamp, short_message, _container_name, level } = gelf;
   const id = nanoid();
 
@@ -74,6 +74,14 @@ server.on('message', async gelf => {
 server.listen(PORT, '0.0.0.0');
 console.info('listening...')
 
+
+
+const requestListener = function (req, res) {
+  res.writeHead(200);
+  res.end('ok');
+}
+const httpServer = http.createServer(requestListener);
+httpServer.listen(80);
 
 
 
