@@ -29,7 +29,7 @@ async function insert(data) {
       message,
       timestamp,
       level,
-      raw_data: JSON.stringify(data),
+      raw_data
     }
   ];
 
@@ -64,7 +64,8 @@ server.on('message', async gelf => {
       tag: host,
       message,
       timestamp,
-      level: level
+      level: level,
+      raw_data: JSON.stringify(gelf)
     });
   } catch(err) {
     console.log(err)
